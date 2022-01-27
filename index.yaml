@@ -1,0 +1,10 @@
+name: gitops-cp-mq-uniform-cluster
+type: gitops
+description: >-
+  Module to populate a gitops repo with the resources to provision
+  cp-mq-uniform-cluster
+tags:
+  - tools
+  - gitops
+versions: []
+id: github.com/cloud-native-toolkit/terraform-gitops-cp-mq-uniform-cluster
