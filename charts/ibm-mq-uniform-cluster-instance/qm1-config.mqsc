@@ -1,0 +1,2 @@
+alter chl(UNICLUS_QM1) chltype(CLUSRCVR) conname('uniform-cluster-qm1-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')
+alter chl(UNICLUS_QM2) chltype(CLUSSDR) conname('uniform-cluster-qm2-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')

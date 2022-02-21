@@ -1,23 +1,12 @@
-# Starter kit for a Terraform GitOps module
+# IBM MQ Uniform Cluster Terraform GitOps module
 
-This is a Starter kit to help with the creation of Terraform modules. The basic structure of a Terraform module is fairly
-simple and consists of the following basic values:
+IBM MQ ensures 99.99% Message Availability. There certain usecases where there is a need for 100% ServiceAvailability & MessageAvailability.
+In such cases, we need to create the Cluster of MQ server using UniformCluster Pattern. Out of Box, IBM MQ Operator supports
+1. SingleInstance
+2. MultiInstance
+3. NativeHA
 
-- README.md - provides a description of the module
-- main.tf - defines the logic for the module
-- variables.tf (optional) - defines the input variables for the module
-- outputs.tf (optional) - defines the values that are output from the module
-
-Beyond those files, any other content can be added and organized however you see fit. For example, you can add a `scripts/` directory
-that contains shell scripts executed by a `local-exec` `null_resource` in the terraform module. The contents will depend on what your
-module does and how it does it.
-
-## Instructions for creating a new module
-
-1. Update the title and description in the README to match the module you are creating
-2. Fill out the remaining sections in the README template as appropriate
-3. Implement your logic in the in the main.tf, variables.tf, and outputs.tf
-4. Use releases/tags to manage release versions of your module
+This GitOps module will help in creating the UniformCluster Pattern of MQ Server.
 
 ## Software dependencies
 
@@ -39,7 +28,9 @@ This module makes use of the output from other modules:
 
 - GitOps - github.com/cloud-native-toolkit/terraform-tools-gitops.git
 - Namespace - github.com/cloud-native-toolkit/terraform-gitops-namespace.git
-- etc
+- Catalogs - github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
+- MQ Operator - github.com/cloud-native-toolkit/terraform-gitops-cp-mq.git
+- Cp4i-Dependency - github.com/cloud-native-toolkit/terraform-cp4i-dependency-management.git
 
 ## Example usage
 

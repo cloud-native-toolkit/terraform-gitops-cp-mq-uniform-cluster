@@ -79,3 +79,68 @@ variable "server_name" {
   description = "The name of the server"
   default     = "default"
 }
+
+variable "license" {
+  type = string
+  description = "The Licesence for MQ on CP4i"
+  default = "L-RJON-C7QG3S"
+}
+variable "license_use" {
+  type = string
+  description = "License use. Production or NonProduction"
+  default = "NonProduction"
+}
+
+variable "mqsc_configmap" {
+  type = string
+  description = "Name of the config map which holds the MQSC configuration"
+  default = "mq-uniform-cluster-mqsc-cm"
+}
+
+variable "ini_configmap" {
+  type = string
+  description = "Name of the config map which holds the ini configuration"
+  default = "mq-uniform-cluster-ini-cm"
+}
+
+variable "MQ_AvailabilityType" {
+  type = string
+  description = "AvailabilityType of MQ. Possible Values are (SingleInstance/MultiInstance/NativeHA)"
+  default = "SingleInstance"
+  
+}
+variable "storageClass" {
+  type = string
+  description = "Incase of SingleInstance use RWO storage class. In case of MultiInstance use RWX. Here we chose SingleInstance."
+  default = "ibmc-block-gold"
+  
+}
+
+variable "mq_version" {
+  type=string
+  description = "Version of MQ server"
+  default = "9.2.4.0-r1"
+  
+}
+variable "entitlement_key" {
+  type        = string
+  description = "The entitlement key required to access Cloud Pak images"
+  sensitive   = true
+}
+
+
+variable "is_mq_uniform_cluster_required_dedicated_ns" {
+  type = bool
+  description = "If MQ Uniform Cluster instance need to be deployed in dedicated namespace"
+  default = false
+
+  
+}
+variable "uniform_cluster_instance_namespace" {
+  type = string
+  description = "It is better to manage MQ Uniform Cluster instance workload in a dedicated namespace"
+  default = "gitops-cp-mq-uniform-cluster"
+}
+
+
+

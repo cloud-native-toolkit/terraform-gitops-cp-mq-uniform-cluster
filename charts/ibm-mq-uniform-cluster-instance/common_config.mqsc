@@ -1,0 +1,23 @@
+
+*##########################################################################
+* Compulsory section for all uniform cluster queue managers
+*##########################################################################
+define channel('+AUTOCL+_+QMNAME+') chltype(clusrcvr) trptype(tcp) conname(+CONNAME+) cluster('+AUTOCL+') replace
+
+*##########################################################################
+* Configuration for all queue managers
+*##########################################################################
+
+define QL(APPQ1) cluster(UNICLUS) defbind(notfixed) clwluseq(any) maxdepth(99999999) replace
+define QL(APPQ2) cluster(UNICLUS) defbind(notfixed) clwluseq(any) maxdepth(99999999) replace
+
+
+*With TLS Enabled
+*DEFINE CHANNEL(DEF.SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12')
+
+*Without TLS Disable
+DEFINE CHANNEL(DEF.SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) MCAUSER('mqm')
+ALTER QMGR CHLAUTH(disabled)
+
+
+REFRESH SECURITY TYPE(CONNAUTH)
