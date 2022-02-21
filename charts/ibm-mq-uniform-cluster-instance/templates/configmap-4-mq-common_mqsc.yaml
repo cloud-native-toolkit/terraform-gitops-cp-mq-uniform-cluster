@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.mq_uniform_cluster_instance.configMap.mqsc.name }}
+data:
+  common_config.mqsc: |-
+    {{ .Files.Get "common_config.mqsc" | nindent 4 }}

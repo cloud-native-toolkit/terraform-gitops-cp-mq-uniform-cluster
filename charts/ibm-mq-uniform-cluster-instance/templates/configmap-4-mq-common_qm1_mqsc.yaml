@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.mq_uniform_cluster_instance.configMap.qm1_mqsc.name }}
+data:
+  qm1-config.mqsc: |-
+    {{- range $.Values.mq_uniform_cluster_instance.configMap.qm1_mqsc.commands }}
+    {{ .   }}
+    {{- end }}  

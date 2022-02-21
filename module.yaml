@@ -8,18 +8,28 @@ tags:
   - gitops
 versions:
   - platforms:
-      - kubernetes
-      - ocp3
       - ocp4
     dependencies:
       - id: gitops
         refs:
           - source: github.com/cloud-native-toolkit/terraform-tools-gitops.git
-            version: '>= 1.1.0'
+            version: ">= 1.1.0"
+      - id: catalogs
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
+            version: ">= 1.0.0"
+      - id: dep-manager
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-cp4i-dependency-management.git
+            version: ">= 1.0.0"
       - id: namespace
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
-            version: '>= 1.0.0'
+            version: ">= 1.0.0"
+      - id: mq
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-mq.git
+            version: ">= 1.0.0"
     variables:
       - name: gitops_config
         moduleRef:
@@ -33,11 +43,29 @@ versions:
         moduleRef:
           id: gitops
           output: server_name
-      - name: namespace
-        moduleRef:
-          id: namespace
-          output: name
       - name: kubeseal_cert
         moduleRef:
           id: gitops
           output: sealed_secrets_cert
+      - name: namespace
+        moduleRef:
+          id: namespace
+          output: name
+      - name: entitlement_key
+        moduleRef:
+          id: catalogs
+          output: entitlement_key
+      - name: license_use
+        moduleRef:
+          id: dep-manager
+          output: mq.license_use
+      - name: mq_version
+        moduleRef:
+          id: dep-manager
+          output: mq.version
+      - name: license
+        moduleRef:
+          id: dep-manager
+          output: mq.license
+
+

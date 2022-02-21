@@ -1,0 +1,85 @@
+mq_uniform_cluster_instance:
+  license:
+    accept: true
+    license: L-RJON-C7QG3S
+    metric: VirtualProcessorCore
+    use: NonProduction
+  queueManager:
+    mqsc:
+      - configMap:
+          name: mq-uniform-cluster-mqsc-cm
+          items:
+            - common_config.mqsc
+    ini:
+      - configMap:
+          name: mq-uniform-cluster-ini-cm
+          items:
+            - config.ini  
+    availability:
+      type: SingleInstance
+    logFormat: Basic
+    name: QM1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    route:
+      enabled: true
+    storage:
+      defaultClass: ibmc-block-gold
+      persistedData:
+        enabled: false
+      queueManager:
+        type: persistent-claim
+        #class: ibmc-block-gold
+        deleteClaim: true
+      recoveryLogs:
+        enabled: false
+  securityContext:
+    initVolumeAsRoot: false
+  template:
+    pod:
+      containers:
+        - env:
+            - name: MQSNOAUT
+              value: 'yes'
+          name: qmgr
+          resources: {}
+  version: 9.2.4.0-r1
+  web:
+    enabled: true
+
+  
+
+  # Values for MQSC & ini ConfigMap
+  configMap:
+    mqsc:
+      name: mq-uniform-cluster-mqsc-cm
+    ini:
+      name: mq-uniform-cluster-ini-cm
+      AutoCluster:
+        - Repository2Conname=uniform-cluster-qm1-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)
+        - Repository2Name=QM1
+        - Repository1Conname=uniform-cluster-qm2-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)
+        - Repository1Name=QM2
+        - ClusterName=UNICLUS
+        - Type=Uniform
+    qm3_mqsc:
+      name: mq-uniform-cluster-qm3-mqsc-cm
+      commands: 
+        - alter chl(UNICLUS_QM1) chltype(CLUSSDR) conname('uniform-cluster-qm1-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')
+        - alter chl(UNICLUS_QM2) chltype(CLUSSDR) conname('uniform-cluster-qm2-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')
+        - alter chl(UNICLUS_QM3) chltype(CLUSRCVR) conname('uniform-cluster-qm3-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')    
+    qm2_mqsc:
+      name: mq-uniform-cluster-qm2-mqsc-cm
+      commands:
+        - alter chl(UNICLUS_QM1) chltype(CLUSSDR) conname('uniform-cluster-qm1-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')
+        - alter chl(UNICLUS_QM2) chltype(CLUSRCVR) conname('uniform-cluster-qm2-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')    
+    qm1_mqsc:
+      name: mq-uniform-cluster-qm1-mqsc-cm
+      commands:                
+        - alter chl(UNICLUS_QM1) chltype(CLUSRCVR) conname('uniform-cluster-qm1-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')
+        - alter chl(UNICLUS_QM2) chltype(CLUSSDR) conname('uniform-cluster-qm2-ibm-mq.gitops-cp-mq-uniform-cluster.svc(1414)')

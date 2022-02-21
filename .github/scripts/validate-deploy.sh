@@ -51,20 +51,29 @@ else
 fi
 
 DEPLOYMENT="${COMPONENT_NAME}-${BRANCH}"
+QUEUEMANAGER_CRD="queuemanager"
+TIMEOUT=60
 count=0
-until kubectl get deployment "${DEPLOYMENT}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
-  echo "Waiting for deployment/${DEPLOYMENT} in ${NAMESPACE}"
+DESIRED_STATE="Running Running Running "
+
+until [[ $(kubectl get ${QUEUEMANAGER_CRD}  -n  ${NAMESPACE} -o jsonpath="{range .items[*]}{.status.phase}{' '}{end}") == ${DESIRED_STATE} ||  $count -eq ${TIMEOUT} ]]; do
+
+  echo "Waiting for 3 instance of Queuemanagers to come up in ${NAMESPACE}"
   count=$((count + 1))
-  sleep 15
+  sleep 60
 done
 
-if [[ $count -eq 20 ]]; then
-  echo "Timed out waiting for deployment/${DEPLOYMENT} in ${NAMESPACE}"
+
+if [[ $count -eq ${TIMEOUT} ]]; then
+  echo "Timed out waiting for 3 instance of Queuemanagers to come up in ${NAMESPACE}"
   kubectl get all -n "${NAMESPACE}"
   exit 1
+
+else
+  echo "Found the 3 instances of QueueManager in a Running state in ${NAMESPACE}"
 fi
 
-kubectl rollout status "deployment/${DEPLOYMENT}" -n "${NAMESPACE}" || exit 1
+
 
 cd ..
 rm -rf .testrepo

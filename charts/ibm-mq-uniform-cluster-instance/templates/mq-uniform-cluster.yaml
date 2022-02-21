@@ -1,0 +1,129 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: uniform-cluster-qm1
+spec:
+  license:
+    {{- toYaml .Values.mq_uniform_cluster_instance.license | nindent 4 }}
+  queueManager:
+    mqsc:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.mqsc | nindent 6 }}
+      - configMap:
+          name: mq-uniform-cluster-qm1-mqsc-cm
+          items:
+            - qm1-config.mqsc
+
+    ini:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.ini | nindent 6 }}
+    availability:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.availability | nindent 6 }}
+    logFormat: {{ .Values.mq_uniform_cluster_instance.queueManager.logFormat }}
+    name: QM1
+    resources:
+       {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.resources | nindent 6 }}    
+    route:
+      enabled: true
+    storage:
+      defaultClass: {{ .Values.mq_uniform_cluster_instance.queueManager.storage.defaultClass }}
+      persistedData:
+        {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.persistedData | nindent 8 }}
+      queueManager:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.queueManager | nindent 8 }}      
+      recoveryLogs:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.recoveryLogs | nindent 8 }}
+  securityContext:
+    initVolumeAsRoot: false
+  template:
+    pod:
+    {{- toYaml .Values.mq_uniform_cluster_instance.template.pod | nindent 6 }}
+  version: {{ .Values.mq_uniform_cluster_instance.version  }}
+  web:
+    enabled: true
+
+---
+
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: uniform-cluster-qm2
+spec:
+  license:
+    {{- toYaml .Values.mq_uniform_cluster_instance.license | nindent 4 }}
+  queueManager:
+    mqsc:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.mqsc | nindent 6 }}
+      - configMap:
+          name: mq-uniform-cluster-qm2-mqsc-cm
+          items:
+            - qm2-config.mqsc
+
+    ini:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.ini | nindent 6 }}
+    availability:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.availability | nindent 6 }}
+    logFormat: {{ .Values.mq_uniform_cluster_instance.queueManager.logFormat }}
+    name: QM2
+    resources:
+       {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.resources | nindent 6 }}    
+    route:
+      enabled: true
+    storage:
+      defaultClass: {{ .Values.mq_uniform_cluster_instance.queueManager.storage.defaultClass }}
+      persistedData:
+        {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.persistedData | nindent 8 }}
+      queueManager:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.queueManager | nindent 8 }}      
+      recoveryLogs:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.recoveryLogs | nindent 8 }}
+  securityContext:
+    initVolumeAsRoot: false
+  template:
+    pod:
+    {{- toYaml .Values.mq_uniform_cluster_instance.template.pod | nindent 6 }}
+  version: {{ .Values.mq_uniform_cluster_instance.version  }}
+  web:
+    enabled: true
+
+---
+
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: uniform-cluster-qm3
+spec:
+  license:
+    {{- toYaml .Values.mq_uniform_cluster_instance.license | nindent 4 }}
+  queueManager:
+    mqsc:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.mqsc | nindent 6 }}
+      - configMap:
+          name: mq-uniform-cluster-qm3-mqsc-cm
+          items:
+            - qm3-config.mqsc
+      
+    ini:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.ini | nindent 6 }}
+    availability:
+      {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.availability | nindent 6 }}
+    logFormat: {{ .Values.mq_uniform_cluster_instance.queueManager.logFormat }}
+    name: QM3
+    resources:
+       {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.resources | nindent 6 }}    
+    route:
+      enabled: true
+    storage:
+      defaultClass: {{ .Values.mq_uniform_cluster_instance.queueManager.storage.defaultClass }}
+      persistedData:
+        {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.persistedData | nindent 8 }}
+      queueManager:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.queueManager | nindent 8 }}      
+      recoveryLogs:
+         {{- toYaml .Values.mq_uniform_cluster_instance.queueManager.storage.recoveryLogs | nindent 8 }}
+  securityContext:
+    initVolumeAsRoot: false
+  template:
+    pod:
+    {{- toYaml .Values.mq_uniform_cluster_instance.template.pod | nindent 6 }}
+  version: {{ .Values.mq_uniform_cluster_instance.version  }}
+  web:
+    enabled: true    
