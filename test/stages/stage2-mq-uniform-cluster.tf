@@ -11,8 +11,6 @@ module "gitops_module" {
   entitlement_key = module.cp_catalogs.entitlement_key
 
   #Uniform Cluster specifics
-  is_mq_uniform_cluster_required_dedicated_ns = true
-  uniform_cluster_instance_namespace="gitops-cp-mq-uniform-cluster"
   storageClass="portworx-db2-rwo-sc"
 
 

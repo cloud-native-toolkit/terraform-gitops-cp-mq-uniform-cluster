@@ -1,6 +1,6 @@
 locals {
-  # If decided to create the MQ Uniform Cluster instance in the dedicated namepace 
-  namespace = var.is_mq_uniform_cluster_required_dedicated_ns ? var.uniform_cluster_instance_namespace : var.namespace
+  
+  namespace = var.namespace
 
   name          = "gitops-cp-mq-uniform-cluster"
   bin_dir       = module.setup_clis.bin_dir
