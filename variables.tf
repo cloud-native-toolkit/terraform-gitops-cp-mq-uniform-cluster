@@ -129,18 +129,4 @@ variable "entitlement_key" {
 }
 
 
-variable "is_mq_uniform_cluster_required_dedicated_ns" {
-  type = bool
-  description = "If MQ Uniform Cluster instance need to be deployed in dedicated namespace"
-  default = false
-
-  
-}
-variable "uniform_cluster_instance_namespace" {
-  type = string
-  description = "It is better to manage MQ Uniform Cluster instance workload in a dedicated namespace"
-  default = "gitops-cp-mq-uniform-cluster"
-}
-
-
 
