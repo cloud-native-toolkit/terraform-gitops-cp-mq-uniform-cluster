@@ -6,6 +6,7 @@ In such cases, we need to create the Cluster of MQ server using UniformCluster P
 2. MultiInstance
 3. NativeHA
 
+
 This GitOps module will help in creating the UniformCluster Pattern of MQ Server.
 
 ## Software dependencies
