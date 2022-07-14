@@ -139,7 +139,7 @@ locals {
   }
   values_file = "values.yaml"
   layer = "services"
-  type  = "base"
+  type  = "instances"
   application_branch = "main"
   
   layer_config = var.gitops_config[local.layer]
