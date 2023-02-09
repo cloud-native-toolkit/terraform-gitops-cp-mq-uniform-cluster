@@ -107,13 +107,16 @@ variable "MQ_AvailabilityType" {
   type = string
   description = "AvailabilityType of MQ. Possible Values are (SingleInstance/MultiInstance/NativeHA)"
   default = "SingleInstance"
-  
 }
-variable "storageClass" {
+
+variable "rwx_storage_class" {
   type = string
-  description = "Incase of SingleInstance use RWO storage class. In case of MultiInstance use RWX. Here we chose SingleInstance."
-  default = "ibmc-block-gold"
-  
+  description = "Storage class used for MultiInstance availability type."
+}
+
+variable "rwo_storage_class" {
+  type        = string
+  description = "Storage class used for ingleInstance availability type."
 }
 
 variable "mq_version" {
