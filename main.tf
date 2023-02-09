@@ -13,6 +13,7 @@ locals {
 
   service_url   = "http://${local.name}.${local.namespace}"
 
+  default_storage_class = var.MQ_AvailabilityType == "SingleInstance" ? var.rwo_storage_class : var.rwx_storage_class
 
   values_content = {
 
@@ -58,7 +59,7 @@ locals {
           enabled = true
         }
         storage={
-          defaultClass= var.storageClass
+          defaultClass= local.default_storage_class
           persistedData={
             enabled = false
           }

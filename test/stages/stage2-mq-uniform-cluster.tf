@@ -12,7 +12,6 @@ module "gitops_module" {
   entitlement_key = module.cp_catalogs.entitlement_key
 
   #Uniform Cluster specifics
-  storageClass="ibmc-vpc-block-10iops-tier"
-
-
+  rwx_storage_class = module.storage.rwx_storage_class
+  rwo_storage_class = module.storage.rwo_storage_class
 }
